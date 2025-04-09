@@ -2,11 +2,14 @@
 
 namespace App\Controllers;
 
-use App\Controllers\BaseController;
-use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\RESTful\ResourceController;
+use App\Models\ModelloRisorse;
 
-class ControllerRisorse extends BaseController
+class ControllerRisorse extends ResourceController
 {
+    protected $modelName = 'App\Models\ModelloRisorse';
+    protected $format    = 'json';
+
     public function index()
     {
         $resourceModel = new ModelloRisorse();
@@ -14,20 +17,18 @@ class ControllerRisorse extends BaseController
         return $this->respond($resources);
     }
 
-    // Mostra un singolo utente per ID
     public function show($id = null)
     {
         $resourceModel = new ModelloRisorse();
-        $user = $resourceModel->getRisorsa($id);
+        $resource = $resourceModel->getRisorsa($id);
 
-        if (!$user) {
-            return $this->failNotFound("Utente con ID $id non trovato");
+        if (!$resource) {
+            return $this->failNotFound("Risorsa con ID $id non trovata");
         }
 
-        return $this->respond($user);
+        return $this->respond($resource);
     }
 
-    // Aggiunge un nuovo utente
     public function create()
     {
         $resourceModel = new ModelloRisorse();
@@ -37,10 +38,9 @@ class ControllerRisorse extends BaseController
             return $this->failValidationErrors($resourceModel->errors());
         }
 
-        return $this->respondCreated(['message' => 'Utente creato con successo']);
+        return $this->respondCreated(['message' => 'Risorsa creata con successo']);
     }
 
-    // Aggiorna un utente esistente
     public function update($id = null)
     {
         $resourceModel = new ModelloRisorse();
@@ -50,19 +50,18 @@ class ControllerRisorse extends BaseController
             return $this->failValidationErrors($resourceModel->errors());
         }
 
-        return $this->respondUpdated(['message' => 'Utente aggiornato con successo']);
+        return $this->respondUpdated(['message' => 'Risorsa aggiornata con successo']);
     }
 
-    // Elimina un utente
     public function delete($id = null)
     {
         $resourceModel = new ModelloRisorse();
         
         if (!$resourceModel->getRisorsa($id)) {
-            return $this->failNotFound("Utente con ID $id non trovato");
+            return $this->failNotFound("Risorsa con ID $id non trovata");
         }
 
         $resourceModel->delete($id);
-        return $this->respondDeleted(['message' => 'Utente eliminato con successo']);
+        return $this->respondDeleted(['message' => 'Risorsa eliminata con successo']);
     }
 }

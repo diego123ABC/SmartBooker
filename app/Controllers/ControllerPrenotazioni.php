@@ -2,32 +2,36 @@
 
 namespace App\Controllers;
 
-use App\Controllers\BaseController;
-use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\RESTful\ResourceController;
+use App\Models\ModelloPrenotazioni;
 
-class ControllerPrenotazioni extends BaseController
+class ControllerPrenotazioni extends ResourceController
 {
+    protected $modelName = 'App\Models\ModelloPrenotazioni';
+    protected $format    = 'json';
+
+    // Mostra tutte le prenotazioni
     public function index()
     {
-        $prenotationsModel = new ModelloRisorse();
+        $prenotationsModel = new ModelloPrenotazioni();
         $prenotations = $prenotationsModel->getPrenotazioni();
         return $this->respond($prenotations);
     }
 
-    // Mostra un singolo utente per ID
+    // Mostra una singola prenotazione
     public function show($id = null)
     {
         $prenotationsModel = new ModelloPrenotazioni();
         $prenotation = $prenotationsModel->getPrenotazioni($id);
 
         if (!$prenotation) {
-            return $this->failNotFound("Utente con ID $id non trovato");
+            return $this->failNotFound("Prenotazione con ID $id non trovata");
         }
 
         return $this->respond($prenotation);
     }
 
-    // Aggiunge un nuovo utente
+    // Aggiunge una nuova prenotazione
     public function create()
     {
         $prenotationsModel = new ModelloPrenotazioni();
@@ -37,10 +41,10 @@ class ControllerPrenotazioni extends BaseController
             return $this->failValidationErrors($prenotationsModel->errors());
         }
 
-        return $this->respondCreated(['message' => 'Utente creato con successo']);
+        return $this->respondCreated(['message' => 'Prenotazione creata con successo']);
     }
 
-    // Aggiorna un utente esistente
+    // Aggiorna una prenotazione esistente
     public function update($id = null)
     {
         $prenotationsModel = new ModelloPrenotazioni();
@@ -50,19 +54,20 @@ class ControllerPrenotazioni extends BaseController
             return $this->failValidationErrors($prenotationsModel->errors());
         }
 
-        return $this->respondUpdated(['message' => 'Utente aggiornato con successo']);
+        return $this->respondUpdated(['message' => 'Prenotazione aggiornata con successo']);
     }
 
-    // Elimina un utente
+    // Elimina una prenotazione
     public function delete($id = null)
     {
         $prenotationsModel = new ModelloPrenotazioni();
-        
-        if (!$prenotationsModel->getRisorsa($id)) {
-            return $this->failNotFound("Utente con ID $id non trovato");
+
+        // Assumiamo che tu abbia un metodo per controllare l’esistenza
+        if (!$prenotationsModel->getPrenotazioni($id)) {
+            return $this->failNotFound("Prenotazione con ID $id non trovata");
         }
 
         $prenotationsModel->delete($id);
-        return $this->respondDeleted(['message' => 'Utente eliminato con successo']);
+        return $this->respondDeleted(['message' => 'Prenotazione eliminata con successo']);
     }
 }
