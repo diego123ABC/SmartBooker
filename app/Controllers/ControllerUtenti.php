@@ -15,7 +15,7 @@ class ControllerUtenti extends ResourceController
     {
         $userModel = new ModelloUtenti();
         $users = $userModel->getUtenti();
-        return $this->respond($users);
+        return $this->respond($users);  
     }
 
     // Mostra un singolo utente per ID

@@ -7,6 +7,8 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 $routes->get('utenti', 'ControllerUtenti::index');
-// $routes->resource('utenti', ['controller' => 'ControllerUtenti']);
-$routes->resource('prenotazioni', ['controller' => 'ControllerPrenotazioni']);
+$routes->get('prenotazioni', 'ControllerPrenotazioni::index');
+$routes->get('risorse', 'ControllerRisorse::index');
+$routes->resource('utenti', ['controller' => 'ControllerUtenti']);
 $routes->resource('risorse', ['controller' => 'ControllerRisorse']);
+$routes->resource('prenotazioni', ['controller' => 'ControllerPrenotazioni']);
