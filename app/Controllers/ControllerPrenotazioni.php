@@ -13,9 +13,18 @@ class ControllerPrenotazioni extends ResourceController
     // Mostra tutte le prenotazioni
     public function index()
     {
-        $prenotationsModel = new ModelloPrenotazioni();
-        $prenotations = $prenotationsModel->getPrenotazioni();
-        return $this->respond($prenotations);
+        $model = new ModelloPrenotazioni();
+
+        // 1. Aggiorna le prenotazioni scadute
+        $model->where('stato', 'attiva')
+            ->where('data_fine <', date('Y-m-d H:i:s'))
+            ->set(['stato' => 'scaduta'])
+            ->update();
+
+        // 2. Recupera tutte le prenotazioni (attive e scadute)
+        $prenotazioni = $model->getPrenotazioni();
+
+        return $this->respond($prenotazioni);
     }
 
     // Mostra una singola prenotazione

@@ -67,7 +67,10 @@ class ControllerRisorse extends ResourceController
 
     public function risorsePerTipo($tipo = null)
     {
-        $model = new \App\Models\ModelloRisorse();
+         // Aggiungi un log per verificare il valore di $tipo
+        log_message('debug', 'Parametro tipo ricevuto: ' . $tipo);
+
+        $model = new ModelloRisorse();
 
         if ($tipo === 'dispositivi') {
             $risorse = $model->whereIn('tipo', ['PC', 'stampante', 'proiettore'])->findAll();
@@ -75,8 +78,15 @@ class ControllerRisorse extends ResourceController
             $risorse = $model->where('tipo', $tipo)->findAll();
         }
 
+        // Se non sono state trovate risorse per quel tipo, restituisci un errore
+        if (empty($risorse)) {
+            return $this->failNotFound("Nessuna risorsa trovata per il tipo: $tipo");
+        }
+
+        // Restituisci la vista con le risorse trovate
         return view('lista_risorse', ['risorse' => $risorse, 'tipo' => $tipo]);
     }
+
 
 
 }

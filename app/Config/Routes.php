@@ -12,7 +12,7 @@ $routes->resource('utenti', ['controller' => 'ControllerUtenti']);
 $routes->resource('risorse', ['controller' => 'ControllerRisorse']);
 $routes->resource('prenotazioni', ['controller' => 'ControllerPrenotazioni']);
 $routes->get('form/prenotazione', function() {
-    echo view('form_prenotazione');
+    echo view('crea_prenotazione');
 });
 $routes->get('/', function () {
     echo view('home');
