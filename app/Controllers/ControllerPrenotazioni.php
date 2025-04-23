@@ -37,6 +37,35 @@ class ControllerPrenotazioni extends ResourceController
         $prenotationsModel = new ModelloPrenotazioni();
         $data = $this->request->getPost();
 
+        // Validazione base
+        if (!isset($data['utente_id'], $data['risorsa_id'], $data['data_inizio'], $data['data_fine'])) {
+            return $this->failValidationErrors('Dati mancanti');
+        }
+
+        // Controllo formato date
+        if (strtotime($data['data_inizio']) >= strtotime($data['data_fine'])) {
+            return $this->failValidationErrors('Intervallo date non valido');
+        }
+
+        // Verifica utente esiste
+        $utenteModel = new \App\Models\ModelloUtenti();
+        if (!$utenteModel->find($data['utente_id'])) {
+            return $this->failNotFound('Utente non trovato');
+        }
+
+        // Verifica risorsa esiste e disponibile
+        $risorsaModel = new \App\Models\ModelloRisorse();
+        $risorsa = $risorsaModel->find($data['risorsa_id']);
+        if (!$risorsa || !$risorsa['disponibilita']) {
+            return $this->failNotFound('Risorsa non disponibile o non trovata');
+        }
+
+        // Controllo sovrapposizione
+        if ($prenotationsModel->haSovrapposizione($data['risorsa_id'], $data['data_inizio'], $data['data_fine'])) {
+            return $this->failValidationErrors('Esiste già una prenotazione attiva in quell’orario');
+        }
+
+        // Inserisci
         if (!$prenotationsModel->insert($data)) {
             return $this->failValidationErrors($prenotationsModel->errors());
         }
@@ -70,4 +99,10 @@ class ControllerPrenotazioni extends ResourceController
         $prenotationsModel->delete($id);
         return $this->respondDeleted(['message' => 'Prenotazione eliminata con successo']);
     }
+
+    public function formPrenotazione($risorsa_id)
+    {
+        return view('form_prenotazione', ['risorsa_id' => $risorsa_id]);
+    }
+
 }

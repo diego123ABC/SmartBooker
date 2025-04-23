@@ -19,4 +19,16 @@ class ModelloPrenotazioni extends Model
         return $this->find($id); // Trova un record in base alla chiave primaria
     }
 
+    public function haSovrapposizione($risorsa_id, $data_inizio, $data_fine)
+    {
+        return $this->where('risorsa_id', $risorsa_id)
+            ->where('stato', 'attiva')
+            ->groupStart()
+                ->where("data_inizio <=", $data_fine)
+                ->where("data_fine >=", $data_inizio)
+            ->groupEnd()
+            ->countAllResults() > 0;
+    }
+
+
 }

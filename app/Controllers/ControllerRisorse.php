@@ -64,4 +64,19 @@ class ControllerRisorse extends ResourceController
         $resourceModel->delete($id);
         return $this->respondDeleted(['message' => 'Risorsa eliminata con successo']);
     }
+
+    public function risorsePerTipo($tipo = null)
+    {
+        $model = new \App\Models\ModelloRisorse();
+
+        if ($tipo === 'dispositivi') {
+            $risorse = $model->whereIn('tipo', ['PC', 'stampante', 'proiettore'])->findAll();
+        } else {
+            $risorse = $model->where('tipo', $tipo)->findAll();
+        }
+
+        return view('lista_risorse', ['risorse' => $risorse, 'tipo' => $tipo]);
+    }
+
+
 }
