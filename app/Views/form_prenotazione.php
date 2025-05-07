@@ -8,7 +8,7 @@
 
     <form action="<?= base_url('prenotazioni/inserisci') ?>" method="post">
         <input type="hidden" name="risorsa_id" value="<?= $risorsa_id ?>">
-        <input type="hidden" name="utente_id" value="1"> <!-- per ora hardcoded -->
+        <input type="hidden" name="utente_id" value="<?= session()->get('id') ?>">
 
         <label>Data Inizio:</label>
         <input type="datetime-local" name="data_inizio" required><br>

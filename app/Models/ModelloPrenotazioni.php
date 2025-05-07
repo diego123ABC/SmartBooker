@@ -12,8 +12,9 @@ class ModelloPrenotazioni extends Model
 
     public function getPrenotazioni()
     {
-        return $this->findAll(); // Recupera tutti gli utenti
+        return $this->orderBy('data_inizio', 'DESC')->findAll();
     }
+
     public function getPrenotazione($id)
     {
         return $this->find($id); // Trova un record in base alla chiave primaria

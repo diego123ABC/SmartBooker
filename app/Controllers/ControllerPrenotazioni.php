@@ -30,15 +30,16 @@ class ControllerPrenotazioni extends ResourceController
     // Mostra una singola prenotazione
     public function show($id = null)
     {
-        $prenotationsModel = new ModelloPrenotazioni();
-        $prenotation = $prenotationsModel->getPrenotazioni($id);
+        $model = new ModelloPrenotazioni();
+        $prenotazione = $model->getPrenotazione($id);
 
-        if (!$prenotation) {
+        if (!$prenotazione) {
             return $this->failNotFound("Prenotazione con ID $id non trovata");
         }
 
-        return $this->respond($prenotation);
+        return $this->respond($prenotazione);
     }
+
 
     // Aggiunge una nuova prenotazione
     public function create()
@@ -98,14 +99,13 @@ class ControllerPrenotazioni extends ResourceController
     // Elimina una prenotazione
     public function delete($id = null)
     {
-        $prenotationsModel = new ModelloPrenotazioni();
+        $model = new ModelloPrenotazioni();
 
-        // Assumiamo che tu abbia un metodo per controllare l’esistenza
-        if (!$prenotationsModel->getPrenotazioni($id)) {
+        if (!$model->getPrenotazione($id)) {
             return $this->failNotFound("Prenotazione con ID $id non trovata");
         }
 
-        $prenotationsModel->delete($id);
+        $model->delete($id);
         return $this->respondDeleted(['message' => 'Prenotazione eliminata con successo']);
     }
 
@@ -114,4 +114,37 @@ class ControllerPrenotazioni extends ResourceController
         return view('form_prenotazione', ['risorsa_id' => $risorsa_id]);
     }
 
+    public function creaRicorrente()
+    {
+        $giorni = $this->request->getPost('giorni');
+        $settimane = (int)$this->request->getPost('settimane');
+        $risorsa_id = $this->request->getPost('risorsa_id');
+        $utente_id = session()->get('id'); // Assicurati che la sessione sia attiva
+
+        if (!in_array($giorni, ['lunedì','martedì','mercoledì','giovedì','venerdì']) || $settimane <= 0) {
+            return $this->failValidationErrors('Parametri non validi');
+        }
+
+        $model = new \App\Models\ModelloPrenotazioni();
+
+        for ($i = 0; $i < $settimane; $i++) {
+            $inizio = strtotime("next $giorni +{$i} week 10:00");
+            $fine = strtotime("+1 hour", $inizio);
+
+            $data_inizio = date('Y-m-d H:i:s', $inizio);
+            $data_fine = date('Y-m-d H:i:s', $fine);
+
+            if (!$model->haSovrapposizione($risorsa_id, $data_inizio, $data_fine)) {
+                $model->insert([
+                    'utente_id' => $utente_id,
+                    'risorsa_id' => $risorsa_id,
+                    'data_inizio' => $data_inizio,
+                    'data_fine' => $data_fine,
+                    'stato' => 'attiva'
+                ]);
+            }
+        }
+
+        return $this->respond(['message' => 'Prenotazioni ricorrenti create']);
+    }
 }

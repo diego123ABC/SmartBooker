@@ -1,0 +1,28 @@
+CRITICAL - 2025-05-07 08:17:42 --> ErrorException: Cannot redeclare Config\Filters::$aliases
+[Method: GET, Route: risorse/tipo/aula]
+in APPPATH\Config\Filters.php on line 108.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2025-05-07 08:17:49 --> ErrorException: Cannot redeclare Config\Filters::$aliases
+[Method: GET, Route: risorse/tipo/dispositivi]
+in APPPATH\Config\Filters.php on line 108.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2025-05-07 08:17:56 --> ErrorException: Cannot redeclare Config\Filters::$aliases
+[Method: GET, Route: risorse/tipo/laboratorio]
+in APPPATH\Config\Filters.php on line 108.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2025-05-07 08:18:03 --> ErrorException: Cannot redeclare Config\Filters::$aliases
+[Method: GET, Route: risorse/tipo/laboratorio]
+in APPPATH\Config\Filters.php on line 108.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2025-05-07 08:18:04 --> ErrorException: Cannot redeclare Config\Filters::$aliases
+[Method: GET, Route: risorse/tipo/laboratorio]
+in APPPATH\Config\Filters.php on line 108.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2025-05-07 08:18:04 --> ErrorException: Cannot redeclare Config\Filters::$aliases
+[Method: GET, Route: risorse/tipo/laboratorio]
+in APPPATH\Config\Filters.php on line 108.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2025-05-07 08:18:07 --> ErrorException: Cannot redeclare Config\Filters::$aliases
+[Method: GET, Route: risorse/tipo/laboratorio]
+in APPPATH\Config\Filters.php on line 108.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
