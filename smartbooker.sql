@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Apr 02, 2025 alle 11:22
+-- Creato il: Mag 09, 2025 alle 08:20
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `smartbooker`
 --
+CREATE DATABASE IF NOT EXISTS `smartbooker` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `smartbooker`;
 
 -- --------------------------------------------------------
 
@@ -62,7 +64,9 @@ CREATE TABLE `risorse` (
 --
 
 INSERT INTO `risorse` (`id`, `nome`, `tipo`, `disponibilita`, `descrizione`) VALUES
-(1, 'Lab1', 'laboratorio', 1, 'Bello');
+(1, 'Lab1', 'laboratorio', 1, 'Bello'),
+(2, 'Aula1', 'aula', 1, 'Bella'),
+(3, 'Stampante1', 'stampante', 1, 'Bella');
 
 -- --------------------------------------------------------
 
@@ -124,7 +128,7 @@ ALTER TABLE `prenotazioni`
 -- AUTO_INCREMENT per la tabella `risorse`
 --
 ALTER TABLE `risorse`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT per la tabella `utenti`

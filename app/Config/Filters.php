@@ -104,15 +104,4 @@ class Filters extends BaseFilters
      * @var array<string, array<string, list<string>>>
      */
     public array $filters = [];
-
-    public $aliases = [
-        'auth' => \App\Filters\AuthFilter::class,
-        'admin' => \App\Filters\AdminFilter::class
-    ];
-    
-    public $globals = [
-        'before' => [
-            'auth' => ['except' => ['login', 'register']]
-        ]
-    ];
 }

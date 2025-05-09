@@ -21,4 +21,4 @@
 
     <p><a href="<?= base_url('/') ?>">⬅️ Torna alla Home</a></p>
 </body>
-</html>
+</html> 
