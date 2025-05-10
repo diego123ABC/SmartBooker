@@ -36,7 +36,7 @@ class ControllerAutenticazione extends BaseController
             return redirect()->to('/login')->with('success', 'Registrazione completata!');
         }
 
-        return view('auth/register');
+        return view('register');
     }
 
     public function login()
@@ -71,7 +71,7 @@ class ControllerAutenticazione extends BaseController
             return redirect()->back()->withInput()->with('error', 'Email o password non corretti.');
         }
 
-        return view('auth/login');
+        return view('login');
     }
 
     public function logout()

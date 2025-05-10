@@ -20,6 +20,14 @@ $routes->get('register', 'ControllerAutenticazione::register');
 $routes->post('register', 'ControllerAutenticazione::register');
 $routes->get('logout', 'ControllerAutenticazione::logout');
 
+// Dashboard generica con redirect in base al ruolo
+$routes->get('dashboard', 'DashboardController::index');
+
+// Dashboard specifiche
+$routes->get('admin/dashboard', 'ControllerDashboard::adminDashboard');
+$routes->get('docente/dashboard', 'ControllerDashboard::docenteDashboard');
+$routes->get('studente/dashboard', 'ControllerDashboard::studenteDashboard');
+
 // API Routes
 $routes->resource('utenti', ['controller' => 'ControllerUtenti']);
 $routes->resource('risorse', ['controller' => 'ControllerRisorse']);
