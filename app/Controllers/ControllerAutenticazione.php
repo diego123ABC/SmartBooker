@@ -19,22 +19,20 @@ class ControllerAutenticazione extends BaseController
                 return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
             }
 
-            // Solo utenti loggati e admin possono creare admin/docenti
-            $ruoloScelto = $this->request->getPost('ruolo');
-            if (in_array($ruoloScelto, ['admin', 'docente']) && session()->get('ruolo') !== 'admin') {
-                return redirect()->back()->with('error', 'Non hai i permessi per assegnare questo ruolo.');
-            }
-
             $userModel = new ModelloUtenti();
-            $userModel->insert([
-                'nome' => $this->request->getPost('nome'),
-                'email' => $this->request->getPost('email'),
+            $data = [
+                'nome'     => $this->request->getPost('nome'),
+                'email'    => $this->request->getPost('email'),
                 'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-                'ruolo' => $ruoloScelto ?? 'studente'
-            ]);
+                'ruolo'    => $this->request->getPost('ruolo')
+            ];
 
-            return redirect()->to('/login')->with('success', 'Registrazione completata!');
-        }
+            if ($userModel->insert($data)) {
+                return redirect()->to('/login')->with('success', 'Registrazione completata con successo!');
+            } else {
+                return view('register', ['error' => 'Errore durante la registrazione.']);
+            }
+            }
 
         return view('register');
     }

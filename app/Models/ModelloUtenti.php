@@ -18,4 +18,5 @@ class ModelloUtenti extends Model
     {
         return $this->find($id); // Trova un record in base alla chiave primaria
     }
+    
 }

@@ -3,18 +3,6 @@
 <?= $this->section('content') ?>
     <h2>Registrati</h2>
 
-    <?php if (session()->getFlashdata('errors')): ?>
-        <ul style="color:red">
-            <?php foreach (session()->getFlashdata('errors') as $err): ?>
-                <li><?= $err ?></li>
-            <?php endforeach; ?>
-        </ul>
-    <?php endif; ?>
-
-    <?php if (session()->getFlashdata('error')): ?>
-        <p style="color:red"><?= session()->getFlashdata('error') ?></p>
-    <?php endif; ?>
-
     <form method="post" action="<?= base_url('register') ?>">
         <?= csrf_field() ?>
         <label>Nome:</label><br>
