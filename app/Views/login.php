@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-</head>
-<body>
+<?= $this->extend('layout') ?>
+
+<?= $this->section('content') ?>
     <h2>Accedi</h2>
 
     <?php if (session()->getFlashdata('error')): ?>
@@ -25,5 +21,4 @@
 
         <button type="submit">Login</button>
     </form>
-</body>
-</html>
+<?= $this->endSection() ?>

@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <title>Registrazione</title>
-</head>
-<body>
+<?= $this->extend('layout') ?>
+
+<?= $this->section('content') ?>
     <h2>Registrati</h2>
 
     <?php if (session()->getFlashdata('errors')): ?>
@@ -43,5 +39,4 @@
 
         <button type="submit">Registrati</button>
     </form>
-</body>
-</html>
+<?= $this->endSection() ?>
