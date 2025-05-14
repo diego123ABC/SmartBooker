@@ -2,40 +2,56 @@
 namespace App\Controllers;
 
 use App\Models\ModelloUtenti;
+use CodeIgniter\Controller;
 
 class ControllerAutenticazione extends BaseController
 {
     public function register()
     {
-        if ($this->request->getMethod() === 'post') {
+        dd($this->request->getMethod());
+
+        helper(['form']);
+
+        if ($this->request->getMethod() == 'post') {
+            // Validazione semplice
             $rules = [
-                'nome' => 'required|min_length[3]',
-                'email' => 'required|valid_email|is_unique[utenti.email]',
-                'password' => 'required|min_length[8]',
-                'ruolo' => 'in_list[studente,docente,admin]'
+                'nome'     => 'required|min_length[3]',
+                'email'    => 'required|valid_email|is_unique[utenti.email]',
+                'password' => 'required|min_length[5]',
+                'ruolo'    => 'required|in_list[studente,docente,admin]'
             ];
 
             if (!$this->validate($rules)) {
-                return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+                return view('register', [
+                    'validation' => $this->validator
+                ]);
             }
 
-            $userModel = new ModelloUtenti();
+            $model = new \App\Models\ModelloUtenti();
             $data = [
                 'nome'     => $this->request->getPost('nome'),
                 'email'    => $this->request->getPost('email'),
                 'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
                 'ruolo'    => $this->request->getPost('ruolo')
             ];
-
-            if ($userModel->insert($data)) {
-                return redirect()->to('/login')->with('success', 'Registrazione completata con successo!');
+            
+            if ($model->insert($data)) {
+                dd('Utente registrato correttamente');
             } else {
-                return view('register', ['error' => 'Errore durante la registrazione.']);
+                dd($model->errors()); // <-- QUI vedrai gli errori del Model
             }
-            }
+            
+        }
 
         return view('register');
     }
+
+    public function test()
+    {
+        dd('controller OK');
+    }
+
+
 
     public function login()
     {

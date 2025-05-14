@@ -3,28 +3,37 @@
 <?= $this->section('content') ?>
     <h2>Registrati</h2>
 
-    <form method="post" action="<?= base_url('register') ?>">
-        <?= csrf_field() ?>
-        <label>Nome:</label><br>
-        <input type="text" name="nome" value="<?= old('nome') ?>"><br><br>
+    <form action="<?= base_url('register') ?>" method="post">
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" id="nome" required><br>
 
-        <label>Email:</label><br>
-        <input type="email" name="email" value="<?= old('email') ?>"><br><br>
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" required><br>
 
-        <label>Password:</label><br>
-        <input type="password" name="password"><br><br>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required><br>
 
-        <?php if (session()->get('ruolo') === 'admin'): ?>
-            <label>Ruolo:</label><br>
-            <select name="ruolo">
-                <option value="studente">Studente</option>
-                <option value="docente">Docente</option>
-                <option value="admin">Admin</option>
-            </select><br><br>
-        <?php else: ?>
-            <input type="hidden" name="ruolo" value="studente">
-        <?php endif; ?>
+        <label for="ruolo">Ruolo:</label>
+        <select name="ruolo" id="ruolo" required>
+            <option value="studente">Studente</option>
+            <option value="docente">Docente</option>
+            <option value="admin">Admin</option>
+        </select><br>
 
         <button type="submit">Registrati</button>
     </form>
+
+
+    <?php if (isset($validation)): ?>
+        <div style="color:red;">
+            <?= $validation->listErrors() ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if (isset($error)): ?>
+        <div style="color:red;">
+            <?= $error ?>
+        </div>
+    <?php endif; ?>
+
 <?= $this->endSection() ?>
