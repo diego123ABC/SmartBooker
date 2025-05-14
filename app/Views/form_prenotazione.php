@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Prenota Risorsa</title>
-</head>
-<body>
+<?= $this->extend('layout') ?>
+
+<?= $this->section('content') ?>
     <h2>Prenota una risorsa</h2>
 
     <form action="<?= base_url('prenotazioni/inserisci') ?>" method="post">
@@ -20,5 +17,4 @@
     </form>
 
     <p><a href="<?= base_url('/') ?>">⬅️ Torna alla Home</a></p>
-</body>
-</html> 
+<?= $this->endSection() ?>

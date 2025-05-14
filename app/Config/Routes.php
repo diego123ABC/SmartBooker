@@ -11,22 +11,22 @@ $routes->get('/', function () {
 
 // Web Routes
 $routes->get('SmartBooker/public/risorse/tipo/(:segment)', 'ControllerRisorse::risorsePerTipo/$1');
-$routes->get('prenota/(:num)', 'ControllerPrenotazioni::formPrenotazione/$1');
-$routes->post('prenotazioni/inserisci', 'ControllerPrenotazioni::create');  
+$routes->get('SmartBooker/public/prenota/(:num)', 'ControllerPrenotazioni::formPrenotazione/$1');
+$routes->post('SmartBooker/public/prenotazioni/inserisci', 'ControllerPrenotazioni::create');  
 
 $routes->get('SmartBooker/public/login', 'ControllerAutenticazione::login');
-$routes->post('login', 'ControllerAutenticazione::login');
+$routes->post('SmartBooker/public/login', 'ControllerAutenticazione::login');
 $routes->get('SmartBooker/public/register', 'ControllerAutenticazione::register');
-$routes->post('register', 'ControllerAutenticazione::register');
-$routes->get('logout', 'ControllerAutenticazione::logout');
+$routes->post('SmartBooker/public/register', 'ControllerAutenticazione::register');
+$routes->get('SmartBooker/public/logout', 'ControllerAutenticazione::logout');
 
 // Dashboard generica con redirect in base al ruolo
-$routes->get('dashboard', 'DashboardController::index');
+$routes->get('SmartBooker/public/dashboard', 'DashboardController::index');
 
 // Dashboard specifiche
-$routes->get('admin/dashboard', 'ControllerDashboard::adminDashboard');
-$routes->get('docente/dashboard', 'ControllerDashboard::docenteDashboard');
-$routes->get('studente/dashboard', 'ControllerDashboard::studenteDashboard');
+$routes->get('SmartBooker/public/admin/dashboard', 'ControllerDashboard::adminDashboard');
+$routes->get('SmartBooker/public/docente/dashboard', 'ControllerDashboard::docenteDashboard');
+$routes->get('SmartBooker/public/studente/dashboard', 'ControllerDashboard::studenteDashboard');
 
 // API Routes
 $routes->resource('utenti', ['controller' => 'ControllerUtenti']);

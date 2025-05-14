@@ -35,4 +35,5 @@
             <?php endforeach; ?>
         </div>
     <?php endif; ?>
+    <p><a href="<?= base_url('/') ?>">⬅️ Torna alla Home</a></p>
 <?= $this->endSection() ?>

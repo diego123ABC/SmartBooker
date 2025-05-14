@@ -17,6 +17,7 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    position: relative; /* necessario per .login-box assoluto */
 }
 
 /* Header */
@@ -25,6 +26,7 @@ body {
     color: white;
     padding: 30px 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
 .header h1 {
@@ -33,10 +35,40 @@ body {
     margin-bottom: 5px;
 }
 
+.header h1 a {
+    color: white;
+    text-decoration: none;
+}
+
 .tagline {
     font-size: 1.1rem;
     font-weight: 300;
     opacity: 0.9;
+}
+
+/* Box login/logout in alto a destra */
+.login-box {
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    background-color: #d0ebff;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.login-box a {
+    color: #003366;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.login-box a:hover {
+    text-decoration: underline;
 }
 
 /* Main Content */
@@ -147,17 +179,23 @@ body {
         flex-direction: column;
         align-items: center;
     }
-    
+
     .resource-card {
         width: 100%;
         max-width: 400px;
     }
-    
+
     .header h1 {
         font-size: 2rem;
     }
-    
+
     .welcome-section h2 {
         font-size: 1.8rem;
+    }
+
+    .login-box {
+        position: static;
+        margin-top: 15px;
+        justify-content: center;
     }
 }
