@@ -10,13 +10,13 @@ $routes->get('/', function () {
 });
 
 // Web Routes
-$routes->get('risorse/tipo/(:segment)', 'ControllerRisorse::risorsePerTipo/$1');
+$routes->get('SmartBooker/public/risorse/tipo/(:segment)', 'ControllerRisorse::risorsePerTipo/$1');
 $routes->get('prenota/(:num)', 'ControllerPrenotazioni::formPrenotazione/$1');
 $routes->post('prenotazioni/inserisci', 'ControllerPrenotazioni::create');  
 
-$routes->get('login', 'ControllerAutenticazione::login');
+$routes->get('SmartBooker/public/login', 'ControllerAutenticazione::login');
 $routes->post('login', 'ControllerAutenticazione::login');
-$routes->get('register', 'ControllerAutenticazione::register');
+$routes->get('SmartBooker/public/register', 'ControllerAutenticazione::register');
 $routes->post('register', 'ControllerAutenticazione::register');
 $routes->get('logout', 'ControllerAutenticazione::logout');
 
