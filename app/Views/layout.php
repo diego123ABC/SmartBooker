@@ -19,7 +19,7 @@
                 <?php if (session()->get('isLoggedIn')): ?>
                     <p>Ciao, <?= esc(session()->get('nome')) ?> (<?= esc(session()->get('ruolo')) ?>) | 
                     <a href="<?= base_url(session()->get('ruolo') . '/dashboard') ?>">Dashboard</a> | 
-                    <a href="<?= base_url('logout') ?>">Logout</a></p>
+                    <a href="<?= base_url('index.php/logout') ?>">Logout</a></p>
                 <?php else: ?>
                     <p><a href="<?= base_url('login') ?>">Login</a> | 
                     <a href="<?= base_url('register') ?>">Registrati</a></p>

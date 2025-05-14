@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 09, 2025 alle 08:20
+-- Creato il: Mag 14, 2025 alle 09:51
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `smartbooker`
 --
-CREATE DATABASE IF NOT EXISTS `smartbooker` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `smartbooker`;
 
 -- --------------------------------------------------------
 
@@ -56,18 +54,23 @@ CREATE TABLE `risorse` (
   `nome` varchar(100) NOT NULL,
   `tipo` enum('aula','laboratorio','PC','stampante','proiettore') NOT NULL,
   `disponibilita` tinyint(1) DEFAULT 1,
-  `descrizione` varchar(255) DEFAULT NULL
-  `image` varchar(255) NOT NULL
+  `descrizione` varchar(255) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dump dei dati per la tabella `risorse`
 --
 
-INSERT INTO `risorse` (`id`, `nome`, `tipo`, `disponibilita`, `descrizione`) VALUES
-(1, 'Lab1', 'laboratorio', 1, 'Bello'),
-(2, 'Aula1', 'aula', 1, 'Bella'),
-(3, 'Stampante1', 'stampante', 1, 'Bella');
+INSERT INTO `risorse` (`id`, `nome`, `tipo`, `disponibilita`, `descrizione`, `image`) VALUES
+(1, 'Lab1', 'laboratorio', 1, 'Bello', NULL),
+(2, 'Aula1', 'aula', 1, 'Bella', NULL),
+(3, 'Stampante1', 'stampante', 1, 'Bella', NULL),
+(4, 'Lab2', 'laboratorio', 1, 'Laboratorio informatico con 20 PC', 'images/lab2.jpg'),
+(5, 'Aula2', 'aula', 1, 'Aula con proiettore e lavagna smart', 'images/aula2.jpg'),
+(6, 'PC1', 'PC', 1, 'Postazione singola con Windows 11', 'images/pc1.jpg'),
+(7, 'Stampante2', 'stampante', 1, 'Stampante a colori multifunzione', 'images/stampante2.jpg'),
+(8, 'Proiettore1', 'proiettore', 1, 'Proiettore 4K per presentazioni', 'images/proiettore1.jpg');
 
 -- --------------------------------------------------------
 
@@ -129,7 +132,7 @@ ALTER TABLE `prenotazioni`
 -- AUTO_INCREMENT per la tabella `risorse`
 --
 ALTER TABLE `risorse`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT per la tabella `utenti`
