@@ -8,7 +8,7 @@ class ControllerAutenticazione extends BaseController
 {
     public function register()
     {
-        dd($this->request->getMethod());
+        
 
         helper(['form']);
 
@@ -36,6 +36,7 @@ class ControllerAutenticazione extends BaseController
             ];
             
             if ($model->insert($data)) {
+                db()->showLastQuery();
                 dd('Utente registrato correttamente');
             } else {
                 dd($model->errors()); // <-- QUI vedrai gli errori del Model

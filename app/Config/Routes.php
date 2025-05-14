@@ -14,20 +14,12 @@ $routes->get('SmartBooker/public/risorse/tipo/(:segment)', 'ControllerRisorse::r
 $routes->get('SmartBooker/public/prenota/(:num)', 'ControllerPrenotazioni::formPrenotazione/$1');
 $routes->post('SmartBooker/public/prenotazioni/inserisci', 'ControllerPrenotazioni::create');  
 
-<<<<<<< Updated upstream
 $routes->get('SmartBooker/public/login', 'ControllerAutenticazione::login');
-$routes->post('SmartBooker/public/login', 'ControllerAutenticazione::login');
-$routes->get('SmartBooker/public/register', 'ControllerAutenticazione::register');
-$routes->post('SmartBooker/public/register', 'ControllerAutenticazione::register');
-$routes->get('SmartBooker/public/logout', 'ControllerAutenticazione::logout');
-=======
-$routes->get('login', 'ControllerAutenticazione::login');
 $routes->post('login', 'ControllerAutenticazione::login');
-$routes->get('register', 'ControllerAutenticazione::register'); 
-$routes->post('register', 'ControllerAutenticazione::register');
+$routes->get('SmartBooker/public/register', 'ControllerAutenticazione::register'); 
+$routes->post('SmartBooker/public/register', 'ControllerAutenticazione::register');
 $routes->get('test', 'ControllerAutenticazione::test');
 $routes->get('logout', 'ControllerAutenticazione::logout');
->>>>>>> Stashed changes
 
 // Dashboard generica con redirect in base al ruolo
 $routes->get('SmartBooker/public/dashboard', 'DashboardController::index');

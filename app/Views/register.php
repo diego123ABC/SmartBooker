@@ -4,6 +4,7 @@
     <h2>Registrati</h2>
 
     <form action="<?= base_url('register') ?>" method="post">
+        <?= csrf_field() ?>
         <label for="nome">Nome:</label>
         <input type="text" name="nome" id="nome" required><br>
 
